@@ -1,5 +1,7 @@
 package com.ecommerce.productservice.service;
 
+import com.ecommerce.productservice.dto.ProductRequest;
+import com.ecommerce.productservice.dto.ProductResponse;
 import com.ecommerce.productservice.entity.Product;
 import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
 
@@ -7,13 +9,13 @@ import java.util.List;
 
 public interface ProductService {
 
-    Product createProduct(Product product);
+    ProductResponse createProduct(ProductRequest productRequest);
 
-    List<Product> getAllProducts();
+    List<ProductResponse> getAllProducts();
 
-    Product getProductById(Long id);
+    ProductResponse getProductById(Long id);
 
-    Product updateProductById(Long id,Product product);
+    ProductResponse updateProductById(Long id,ProductRequest productRequest);
 
     void deleteProduct(Long id);
 }
