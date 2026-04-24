@@ -1,10 +1,8 @@
-package com.ecommerce.productservice.dto;
+package com.ecommerce.order_service.dto;
 
 
-import com.ecommerce.productservice.entity.Product;
-import lombok.*;
-
-
+import lombok.Builder;
+import lombok.Data;
 
 @Builder
 @Data
@@ -19,5 +17,4 @@ public class ProductResponse {
     private Double price;
 
     private Integer quantity;
-
 }
