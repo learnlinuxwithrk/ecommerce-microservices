@@ -1,0 +1,38 @@
+services:
+  service-registry:
+    build: .
+    container_name: service-registry
+    ports:
+      - "8761:8761"
+    networks:
+      - ecom-pro
+
+  product-service:
+    build: .
+    container_name: product-service
+    ports:
+      - "8181:8181"
+    depends_on:
+      - service-registry
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://service-registry:8761/eureka/
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-product:5432/product_service
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgres
+    networks:
+      - ecom-pro
+
+  postgres-product:
+    image: postgres:16
+    container_name: postgres-product
+    environment:
+      POSTGRES_DB: product_service
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5434:5432"
+    networks:
+      - ecom-pro
+
+networks:
+  ecom-pro:
